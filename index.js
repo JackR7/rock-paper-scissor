@@ -1,38 +1,76 @@
 const rock = "Rock";
 const paper = "Paper";
 const scissor = "Scissor";
-let input;
+let playerInput;
+let computerInput;
 
-
-
-const gameArray = [rock, paper, scissor];
+const gameChoices = [rock, paper, scissor];
 
 function startGame() {
-    input = prompt("Scegli tra Rock, Paper e Scissor");
-    console.log("Scelta computer" + " " + getComputerChoice(gameArray));
-    console.log("Scelta giocatore" + " " + playerSelection(input, gameArray));
+    playerInput = prompt("Scegli tra Rock, Paper e Scissor");
+    getComputerChoice(gameChoices);
+    playerSelection(playerInput, gameChoices);
+    game(playerInput, computerInput);
 }
 
-function getComputerChoice(gameArray) {
-    /* ritornare numero random tra 0 e 2 */
-    let result = gameArray[Math.floor(Math.random() * gameArray.length)];
-    return result;
+function getComputerChoice(gameChoices) {
+    computerInput = gameChoices[Math.floor(Math.random() * gameChoices.length)];
+    console.log("Scelta computer" + " " + computerInput);
+    return computerInput;
 }
 
-function playerSelection(input, gameArray) {
-    let result;
-    for (let i = 0; i <= gameArray.length - 1; i++) {
-        /* check if input string is inside the array */
-        if (input.toUpperCase() === gameArray[i].toUpperCase()) {
-            result = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+/* funzione selezione giocatore:
+FOR gameChoices
+IF playerInput equals array item
+put the playerInput in result variable
+RETURN result
+
+
+ */
+function playerSelection(playerInput, gameChoices) {
+    for (let i = 0; i <= gameChoices.length - 1; i++) {
+        if (playerInput.toUpperCase() === gameChoices[i].toUpperCase()) {
+            playerInput = playerInput.charAt(0).toUpperCase() + playerInput.slice(1).toLowerCase();
+            return console.log("Scelta giocatore" + " " + playerInput);
         } 
-    } 
-    return result;
+    }    
+        console.log("Inserire Rock, Paper o Scissor");
+        startGame();
 }
 
+/*  Rock > Scissor
+    Rock = Rock
+    Paper > Rock
+    Paper = Paper
+    Scissor > Paper
+    Scissor = Scissor
+ */
 
+function game(playerInput, computerInput){
+    if(playerInput === rock){
+        if (computerInput === scissor){
+            return console.log("The player wins. Rock beats Scissor");
+        } if (computerInput === rock){
+            return console.log("Tie!");
+        } else return console.log("The computer wins. Paper beats Rock");
+    }
+
+    if(playerInput === paper){
+        if (computerInput === rock){
+            return console.log("The player wins. Paper beats Rock");
+        } if (computerInput === paper){
+            return console.log("Tie!");
+        } else console.log("The computer wins. Scissor beats Paper");
+    }
+
+    if(playerInput === scissor){
+        if (computerInput === paper){
+            return console.log("The player wins. Scissor beats Paper");
+        } if (computerInput === scissor){
+            return console.log("Tie!");
+        } else console.log("The computer wins. Rock beats Scissor");
+    }
+}
 
 
 startGame();
-
-
