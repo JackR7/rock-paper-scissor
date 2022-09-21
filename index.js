@@ -13,10 +13,13 @@ function startGame() {
     game();
 }
 
+// assign prompt input to playerInput
 function assignPlayerInput() {
     playerInput = prompt("Choose one between Rock, Paper and Scissor");
 }
 
+// assign a random pick from gameChoises array to computerInput
+// return computerInput
 function computerSelection(gameChoices) {
     computerInput = gameChoices[Math.floor(Math.random() * gameChoices.length)];
     return computerInput;
@@ -28,6 +31,10 @@ function computerSelection(gameChoices) {
 // put the playerInput in result variable
 // RETURN result
 
+// call assignPlayerInput function
+// FOR gameChoisesArray to check IF playerInput is inside gameChoise array
+// return playerInput with first character capitalize
+// in case the program does not enter in the FOR cycle log a message and call function startGame
 function playerSelection(gameChoices) {
     assignPlayerInput();
     for (let i = 0; i < gameChoices.length; i++) {
@@ -36,7 +43,7 @@ function playerSelection(gameChoices) {
         }
     }
 
-    console.log("Inserire Rock, Paper o Scissor");
+    console.log("Insert Rock, Paper or Scissor");
     startGame();
 }
 
