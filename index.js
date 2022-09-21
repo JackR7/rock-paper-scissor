@@ -7,7 +7,6 @@ let playerPoints = 0;
 let computerPoints = 0;
 
 const gameChoices = [rock, paper, scissor];
-let gameChoisesLength = gameChoices.length;
 
 function startGame() {
     game();
@@ -24,12 +23,6 @@ function computerSelection(gameChoices) {
     computerInput = gameChoices[Math.floor(Math.random() * gameChoices.length)];
     return computerInput;
 }
-
-// funzione selezione giocatore:
-// FOR gameChoices
-// IF playerInput equals array item
-// put the playerInput in result variable
-// RETURN result
 
 // call assignPlayerInput function
 // FOR gameChoisesArray to check IF playerInput is inside gameChoise array
