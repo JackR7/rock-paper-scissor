@@ -46,3 +46,8 @@ body{
         top: 200px;
         
     }
+
+    .rock-pic, .paper-pic, .scissor-pic{
+        width: 10%;
+        height: 10%;
+    }
