@@ -3,8 +3,8 @@ const paper = "Paper";
 const scissor = "Scissor";
 var playerInput;
 var computerInput;
-let playerPoints = 0;
-let computerPoints = 0;
+let playerScore = 0;
+let computerScore = 0;
 
 const gameChoices = [rock, paper, scissor];
 
@@ -55,49 +55,49 @@ function round() {
     console.log("Computer choose: " + computerSelection(gameChoices));
     if (playerInput === rock) {
         if (computerInput === scissor) {
-            playerPoints++;
+            playerScore++;
             console.log("The player wins." + " " + playerInput + " " + "beats" + " " + computerInput);
-            return console.log("Player points: " + playerPoints + " - "
-                + "Computer points: " + computerPoints);
+            return console.log("Player points: " + playerScore + " - "
+                + "Computer points: " + computerScore);
         } if (computerInput === rock) {
             console.log("Tie!");
-            return console.log("Player points: " + playerPoints + " - "
-                + "Computer points: " + computerPoints);
+            return console.log("Player points: " + playerScore + " - "
+                + "Computer points: " + computerScore);
         } else
-            computerPoints++;
+            computerScore++;
         console.log("The computer wins." + " " + computerInput + " " + "beats" + " " + playerInput);
-        return console.log("Player points: " + playerPoints + " - "
-            + "Computer points: " + computerPoints);
+        return console.log("Player points: " + playerScore + " - "
+            + "Computer points: " + computerScore);
     }
 
     if (playerInput === paper) {
         if (computerInput === rock) {
-            playerPoints++;
+            playerScore++;
             console.log("The player wins." + " " + playerInput + " " + "beats" + " " + computerInput);
-            return console.log("Player points: " + playerPoints + " - "
-                + "Computer points: " + computerPoints);
+            return console.log("Player points: " + playerScore + " - "
+                + "Computer points: " + computerScore);
         } if (computerInput === paper) {
             return console.log("Tie!");
         } else
-            computerPoints++;
+            computerScore++;
         console.log("The computer wins." + " " + computerInput + " " + "beats" + " " + playerInput);
-        return console.log("Player points: " + playerPoints + " - "
-            + "Computer points: " + computerPoints);
+        return console.log("Player points: " + playerScore + " - "
+            + "Computer points: " + computerScore);
     }
 
     if (playerInput === scissor) {
         if (computerInput === paper) {
-            playerPoints++;
+            playerScore++;
             console.log("The player wins." + " " + playerInput + " " + "beats" + " " + computerInput);
-            return console.log("Player points: " + playerPoints + " - "
-                + "Computer points: " + computerPoints);
+            return console.log("Player points: " + playerScore + " - "
+                + "Computer points: " + computerScore);
         } if (computerInput === scissor) {
             return console.log("Tie!");
         } else
-            computerPoints++;
+            computerScore++;
         console.log("The computer wins." + " " + computerInput + " " + "beats" + " " + playerInput);
-        return console.log("Player points: " + playerPoints + " - "
-            + "Computer points: " + computerPoints);
+        return console.log("Player points: " + playerScore + " - "
+            + "Computer points: " + computerScore);
     }
 }
 
@@ -106,12 +106,13 @@ function game() {
         console.log("Round: " + (i + 1));
         round(playerInput, computerInput);
     }
-    console.log("Game ended. Player score: " + playerPoints + ", " +
-        "Computer score " + computerPoints);
-    if (playerPoints > computerPoints) {
+    console.log("Game ended. Player score: " + playerScore + ", " +
+        "Computer score " + computerScore);
+    if (playerScore > computerScore) {
         return console.log("The player win!");
     }
     else return console.log("You lose!");
 }
 
-startGame();
+/*startGame();
+*/
