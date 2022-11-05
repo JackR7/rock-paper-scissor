@@ -42,12 +42,34 @@ body{
         display: flex;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
         position: relative;
         top: 200px;
         
     }
 
-    .rock-pic, .paper-pic, .scissor-pic{
-        width: 10%;
-        height: 10%;
+    .buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
     }
+
+
+        .rock-button, .paper-button, .scissor-button{
+            width: 150px;
+            height: 150px;
+            border-radius: 20px;
+            background-color: rgb(75, 75, 75);
+            color: white;
+        }
+
+        .rock-button:hover, .paper-button:hover, .scissor-button:hover{
+            background-color: rgb(136, 136, 136);
+        
+        }
+
+        .rock-pic, .paper-pic, .scissor-pic{
+            width: 30%;
+            height: 40%;
+        }
