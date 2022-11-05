@@ -1,118 +1,84 @@
-const rock = "Rock";
-const paper = "Paper";
-const scissor = "Scissor";
-var playerInput;
-var computerInput;
+//game
+
+let playerChoice;
+let computerChoice;
+let roundWinner;
 let playerScore = 0;
 let computerScore = 0;
 
-const gameChoices = [rock, paper, scissor];
+function round(playerChoice, computerChoice){
 
-function startGame() {
-    game();
-}
-
-// assign prompt input to playerInput
-function assignPlayerInput() {
-    playerInput = prompt("Choose one between Rock, Paper and Scissor");
-}
-
-// assign a random pick from gameChoises array to computerInput
-// return computerInput
-function computerSelection(gameChoices) {
-    computerInput = gameChoices[Math.floor(Math.random() * gameChoices.length)];
-    return computerInput;
-}
-
-// call assignPlayerInput function
-// FOR gameChoisesArray to check IF playerInput is inside gameChoise array
-// return playerInput with first character capitalize
-// in case the program does not enter in the FOR cycle log a message and call function startGame
-function playerSelection(gameChoices) {
-    assignPlayerInput();
-    for (let i = 0; i < gameChoices.length; i++) {
-        if (playerInput.toUpperCase() === gameChoices[i].toUpperCase()) {
-            return playerInput = playerInput.charAt(0).toUpperCase() + playerInput.slice(1).toLowerCase();
+    switch(playerChoice){
+        case "ROCK":
+        if(computerChoice = "ROCK"){
+            roundWinner = "TIE";
         }
-    }
 
-    console.log("Insert Rock, Paper or Scissor");
-    startGame();
-}
-
-
-
-// Rock > Scissor
-// Rock = Rock
-// Paper > Rock
-// Paper = Paper
-// Scissor > Paper
-// Scissor = Scissor
-
-
-function round() {
-    console.log("Player choose: " + playerSelection(gameChoices));
-    console.log("Computer choose: " + computerSelection(gameChoices));
-    if (playerInput === rock) {
-        if (computerInput === scissor) {
-            playerScore++;
-            console.log("The player wins." + " " + playerInput + " " + "beats" + " " + computerInput);
-            return console.log("Player points: " + playerScore + " - "
-                + "Computer points: " + computerScore);
-        } if (computerInput === rock) {
-            console.log("Tie!");
-            return console.log("Player points: " + playerScore + " - "
-                + "Computer points: " + computerScore);
-        } else
+        if(computerChoice = "PAPER"){
+            roundWinner = "COMPUTER";
             computerScore++;
-        console.log("The computer wins." + " " + computerInput + " " + "beats" + " " + playerInput);
-        return console.log("Player points: " + playerScore + " - "
-            + "Computer points: " + computerScore);
-    }
+        }
 
-    if (playerInput === paper) {
-        if (computerInput === rock) {
+        if(computerChoice = "SCISSOR"){
+            roundWinner = "PLAYER";
             playerScore++;
-            console.log("The player wins." + " " + playerInput + " " + "beats" + " " + computerInput);
-            return console.log("Player points: " + playerScore + " - "
-                + "Computer points: " + computerScore);
-        } if (computerInput === paper) {
-            return console.log("Tie!");
-        } else
-            computerScore++;
-        console.log("The computer wins." + " " + computerInput + " " + "beats" + " " + playerInput);
-        return console.log("Player points: " + playerScore + " - "
-            + "Computer points: " + computerScore);
-    }
-
-    if (playerInput === scissor) {
-        if (computerInput === paper) {
-            playerScore++;
-            console.log("The player wins." + " " + playerInput + " " + "beats" + " " + computerInput);
-            return console.log("Player points: " + playerScore + " - "
-                + "Computer points: " + computerScore);
-        } if (computerInput === scissor) {
-            return console.log("Tie!");
-        } else
-            computerScore++;
-        console.log("The computer wins." + " " + computerInput + " " + "beats" + " " + playerInput);
-        return console.log("Player points: " + playerScore + " - "
-            + "Computer points: " + computerScore);
+        }
+        break;
+        case "PAPER":
+            if(computerChoice = "ROCK"){
+                roundWinner = "PLAYER";
+                playerScore++;
+            }
+    
+            if(computerChoice = "PAPER"){
+                roundWinner = "TIE";
+            }
+    
+            if(computerChoice = "SCISSOR"){
+                roundWinner = "COMPUTER";
+                computerScore++;
+            }
+        break;
+        case "SCISSOR":
+            if(computerChoice = "ROCK"){
+                roundWinner = "COMPUTER";
+                computerScore++;
+            }
+    
+            if(computerChoice = "PAPER"){
+                roundWinner = "PLAYER";
+                playerScore++;
+            }
+    
+            if(computerChoice = "SCISSOR"){
+                roundWinner = "TIE";
+            }
+        break;
     }
 }
 
-function game() {
-    for (let i = 0; i < 1; i++) {
-        console.log("Round: " + (i + 1));
-        round(playerInput, computerInput);
-    }
-    console.log("Game ended. Player score: " + playerScore + ", " +
-        "Computer score " + computerScore);
-    if (playerScore > computerScore) {
-        return console.log("The player win!");
-    }
-    else return console.log("You lose!");
-}
+// UI
 
-/*startGame();
-*/
+
+
+let roundNumver = 0;
+let input;
+
+let playerSelection = document.getElementById('player-selection');
+let computerSelection = document.getElementsByClassName('computer-selection');
+const rockButton = document.getElementById('rock-btn');
+const paperButton = document.getElementById('paper-btn');
+const scissorButton = document.getElementById('scissor-btn');
+
+
+rockButton.addEventListener('click', () => updatePlayerChoice("Rock"));
+paperButton.addEventListener('click', () => updatePlayerChoice("Paper"));
+scissorButton.addEventListener('click', () => updatePlayerChoice("Scissor"));
+
+function updatePlayerChoice(input){    
+    let img = document.createElement('img');
+    img.src = `../rock-paper-scissor/img/${input}.png`;
+    img.style.width = "100px";
+    img.style.height = "100px";
+    playerSelection.appendChild(img);
+}

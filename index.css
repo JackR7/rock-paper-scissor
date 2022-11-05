@@ -1,6 +1,7 @@
 body{
-    background-color: black;
-    color:rgb(223, 223, 223)
+    background-color: rgb(0, 0, 0);
+    color:rgb(223, 223, 223);
+    margin: 0;
 }
 
     .header{
@@ -13,7 +14,7 @@ body{
         display: flex;
         justify-content: center;
         position: relative;
-        top: 10px;
+        
         font-size: 50px;
         text-align: center;
     }
@@ -22,8 +23,8 @@ body{
         display: flex;
         justify-content: center;
         position: relative;
-        top: 20px;
         font-size: 30px;
+        margin-top: 20px;
 
     }
 
@@ -33,43 +34,56 @@ body{
         justify-content: center;
         gap: 10px;
         position: relative;
-        top: 30px;
         font-size: 30px;
+        margin-top: 20px;
+        margin-bottom: 10px;
     }
 
-
-    .buttons{
+    .selections{
         display: flex;
         flex-direction: row;
         justify-content: center;
-        align-items: center;
         position: relative;
-        top: 200px;
-        
+        gap: 40px;
     }
+
+        #player-selection{
+            border: 2px red solid;
+        }
+
+        .player-questionMark, .computer-questionMark{
+            font-size: 100px;
+            
+        }
 
     .buttons{
         display: flex;
         flex-direction: row;
         justify-content: center;
         gap: 10px;
+        margin-top: 50px;
     }
 
 
-        .rock-button, .paper-button, .scissor-button{
-            width: 150px;
-            height: 150px;
+        .btn{
+            width: 200x;
+            height: 200px;
             border-radius: 20px;
+            padding: 50px;
             background-color: rgb(75, 75, 75);
             color: white;
         }
 
-        .rock-button:hover, .paper-button:hover, .scissor-button:hover{
+        .btn:hover{
             background-color: rgb(136, 136, 136);
         
         }
 
         .rock-pic, .paper-pic, .scissor-pic{
-            width: 30%;
-            height: 40%;
+            width: 100px;
+            height: 100px;
         }
+
+.footer{
+    background-color: rgb(34, 34, 34);   
+}
