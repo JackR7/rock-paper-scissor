@@ -6,7 +6,7 @@ let roundWinner;
 let gameWinner;
 let playerScore = 0;
 let computerScore = 0;
-let gameFinish = false;
+let gameActive = true;
 
 function assignComputerChoice(){
     let number = Math.floor(Math.random() * 3);
@@ -25,6 +25,7 @@ function assignComputerChoice(){
 
 
 function round(playerChoice, computerChoice){
+    gameActive = true;
 
     switch(playerChoice){
         case "Rock":
@@ -86,15 +87,10 @@ function round(playerChoice, computerChoice){
     if(playerScore === computerScore){
         gameWinner = 'TIE';
     } 
-
 }
 
 // UI
 
-
-
-
-let input;
 
 let playerSelection = document.getElementById('player-selection');
 let computerSelection = document.getElementById('computer-selection');
@@ -108,11 +104,8 @@ let computerScoreUI = document.getElementById('computer-score');
 let selectionsUI = document.getElementById('selections');
 let roundWinnerUI = document.getElementById('round-winner');
 
-function updateRoundWinner(){
-    let oldRoundWinnerAnnouncement = document.getElementById('round-winner');
-    if(oldRoundWinnerAnnouncement){
-        oldRoundWinnerAnnouncement.remove();
-    }
+function updateRoundWinnerUI(){
+    removeUpdateRoundWinnerUI();
     let roundWinnerAnnouncement = document.createElement('div');
     roundWinnerAnnouncement.id = 'round-winner';
     switch (roundWinner){
@@ -129,8 +122,16 @@ function updateRoundWinner(){
     selectionsUI.after(roundWinnerAnnouncement);
 }
 
+function removeUpdateRoundWinnerUI(){
+    let oldRoundWinnerAnnouncement = document.getElementById('round-winner');
+    if(oldRoundWinnerAnnouncement){
+        oldRoundWinnerAnnouncement.remove();
+    }
+}
 
-function updateGameWinner(){
+
+function updateGameWinnerUI(){
+    removeUpdateGameWinnerUI();
     let gameWinnerAnnouncement = document.createElement('div');
     gameWinnerAnnouncement.id = 'game-winner';
     gameWinnerAnnouncement.textContent = `The winner is the ${gameWinner}`;
@@ -139,7 +140,14 @@ function updateGameWinner(){
     selectionsUI.after(gameWinnerAnnouncement);
 }
 
-function updatePlayerChoice(input){
+function removeUpdateGameWinnerUI(){
+    let oldGameWinnerAnnouncement = document.getElementById('game-winner');
+    if(oldGameWinnerAnnouncement){
+        oldGameWinnerAnnouncement.remove();
+    }
+}
+
+function updatePlayerChoiceUI(input){
 
     if(roundNumber < 5){
         let questionMark = document.getElementById('player-questionMark');
@@ -161,7 +169,7 @@ function updatePlayerChoice(input){
     } else gameOver();
 }
 
-function updateComputerChoice(computerChoice){
+function updateComputerChoiceUI(computerChoice){
 
     if(roundNumber < 5){
         let questionMark = document.getElementById('computer-questionMark');
@@ -185,22 +193,34 @@ function updateUI(){
     playerScoreUI.textContent = "Player score:" + " " + playerScore;
     computerScoreUI.textContent = "Computer score:" + " " + computerScore;
     roundUI.textContent = "Round" + " " + roundNumber;
-    updateRoundWinner();
+    updateRoundWinnerUI();
 } 
  
-function gameOver(){
-    alert("Ricarica per rigiocare, ancora non l'ho implementato e faccio cagare");
+
+function resetGame(){
+    roundNumber = 0;
+    playerScore = 0;
+    computerScore = 0;
 }
 
+function gameOver(){
+    gameActive = false;
+    let replayBox = confirm("Vuoi rigiocare?");
+    if(replayBox){
+        resetGame();
+        removeUpdateGameWinnerUI();
+        startGame();
+    } 
+}
 
-    rockButton.addEventListener('click', () => updatePlayerChoice("Rock"));
-    paperButton.addEventListener('click', () => updatePlayerChoice("Paper"));
-    scissorButton.addEventListener('click', () => updatePlayerChoice("Scissor"));
-    rockButton.addEventListener('click', () => updateComputerChoice(computerChoice));
-    paperButton.addEventListener('click', () => updateComputerChoice(computerChoice));
-    scissorButton.addEventListener('click', () => updateComputerChoice(computerChoice));
-
-    
+    if(gameActive){
+        rockButton.addEventListener('click', () => updatePlayerChoiceUI("Rock"));
+        paperButton.addEventListener('click', () => updatePlayerChoiceUI("Paper"));
+        scissorButton.addEventListener('click', () => updatePlayerChoiceUI("Scissor"));
+        rockButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));
+        paperButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));
+        scissorButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));    
+    }
 
 function startGame(){
         assignComputerChoice();
@@ -209,6 +229,6 @@ function startGame(){
         } else gameOver();
         updateUI();
         if(roundNumber === 5){
-            updateGameWinner();
+            updateGameWinnerUI();
         } 
 }
