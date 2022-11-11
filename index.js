@@ -103,6 +103,8 @@ let playerScoreUI = document.getElementById('player-score');
 let computerScoreUI = document.getElementById('computer-score');
 let selectionsUI = document.getElementById('selections');
 let roundWinnerUI = document.getElementById('round-winner');
+let gameOverModal = document.getElementById('modal');
+let modalReplayBtn = document.getElementById('replay-btn');
 
 function updateRoundWinnerUI(){
     removeUpdateRoundWinnerUI();
@@ -205,24 +207,22 @@ function resetGame(){
 
 function gameOver(){
     gameActive = false;
-    let replayBox = confirm("Vuoi rigiocare?");
-    if(replayBox){
-        resetGame();
-        removeUpdateGameWinnerUI();
-        startGame();
-    } 
+    resetGame();
+    removeUpdateGameWinnerUI();
+    gameOverModal.style.display = 'flex';
+    modalReplayBtn.addEventListener('click', () => startGame());
+
 }
 
-    if(gameActive){
-        rockButton.addEventListener('click', () => updatePlayerChoiceUI("Rock"));
-        paperButton.addEventListener('click', () => updatePlayerChoiceUI("Paper"));
-        scissorButton.addEventListener('click', () => updatePlayerChoiceUI("Scissor"));
-        rockButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));
-        paperButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));
-        scissorButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));    
-    }
+    rockButton.addEventListener('click', () => updatePlayerChoiceUI("Rock"));
+    paperButton.addEventListener('click', () => updatePlayerChoiceUI("Paper"));
+    scissorButton.addEventListener('click', () => updatePlayerChoiceUI("Scissor"));
+    rockButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));
+    paperButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));
+    scissorButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));    
 
 function startGame(){
+        gameOverModal.style.display = 'none';
         assignComputerChoice();
         if (roundNumber <= 5){
             round(playerChoice, computerChoice);
