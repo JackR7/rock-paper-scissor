@@ -1,4 +1,5 @@
 //game
+
 let roundNumber = 0;
 let playerChoice;
 let computerChoice;
@@ -6,7 +7,7 @@ let roundWinner;
 let gameWinner;
 let playerScore = 0;
 let computerScore = 0;
-let gameActive = true;
+
 
 function assignComputerChoice(){
     let number = Math.floor(Math.random() * 3);
@@ -25,7 +26,6 @@ function assignComputerChoice(){
 
 
 function round(playerChoice, computerChoice){
-    gameActive = true;
 
     switch(playerChoice){
         case "Rock":
@@ -76,7 +76,7 @@ function round(playerChoice, computerChoice){
     }
     roundNumber++;
 
-    if (playerScore > computerScore){
+     if (playerScore > computerScore){
         gameWinner = 'PLAYER';
     } 
 
@@ -105,6 +105,7 @@ let selectionsUI = document.getElementById('selections');
 let roundWinnerUI = document.getElementById('round-winner');
 let gameOverModal = document.getElementById('modal');
 let modalReplayBtn = document.getElementById('replay-btn');
+let modalText = document.getElementById('winner-announcement');
 
 function updateRoundWinnerUI(){
     removeUpdateRoundWinnerUI();
@@ -198,7 +199,6 @@ function updateUI(){
     updateRoundWinnerUI();
 } 
  
-
 function resetGame(){
     roundNumber = 0;
     playerScore = 0;
@@ -206,12 +206,18 @@ function resetGame(){
 }
 
 function gameOver(){
-    gameActive = false;
     resetGame();
     removeUpdateGameWinnerUI();
     gameOverModal.style.display = 'flex';
-    modalReplayBtn.addEventListener('click', () => startGame());
+    if(gameWinner === 'PLAYER' || gameWinner === 'COMPUTER'){
+        modalText.textContent = `The winner is the ${gameWinner}`; 
+    } else modalText.textContent = `It's a tie!`;
+    
+    modalReplayBtn.addEventListener('click', () => refreshPage());
+}
 
+function refreshPage(){
+    window.location.reload();
 }
 
     rockButton.addEventListener('click', () => updatePlayerChoiceUI("Rock"));
@@ -219,16 +225,22 @@ function gameOver(){
     scissorButton.addEventListener('click', () => updatePlayerChoiceUI("Scissor"));
     rockButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));
     paperButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));
-    scissorButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice));    
+    scissorButton.addEventListener('click', () => updateComputerChoiceUI(computerChoice)); 
+
+   
 
 function startGame(){
         gameOverModal.style.display = 'none';
+        updateUI();
+        
         assignComputerChoice();
         if (roundNumber <= 5){
             round(playerChoice, computerChoice);
         } else gameOver();
         updateUI();
         if(roundNumber === 5){
-            updateGameWinnerUI();
+            //updateGameWinnerUI();
+            gameOver();
         } 
 }
+

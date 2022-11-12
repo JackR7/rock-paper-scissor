@@ -159,6 +159,16 @@ body{
         background-color: rgb(32, 32, 32);
     }
     
-    #replay-btn{
-        width: 80%;
-    }
+
+        #winner-announcement{
+            font-size: 40px;
+        }
+
+        #retry{
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        #replay-btn{
+            width: 60px;
+        }
